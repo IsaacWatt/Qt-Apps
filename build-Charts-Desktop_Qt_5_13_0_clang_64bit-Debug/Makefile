@@ -53,9 +53,15 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../Charts/main.cpp \
-		../Charts/mainwindow.cpp moc_mainwindow.cpp
+		../Charts/mainwindow.cpp \
+		../Charts/vert.cpp \
+		../Charts/horiz.cpp \
+		../Charts/pie.cpp moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		vert.o \
+		horiz.o \
+		pie.o \
 		moc_mainwindow.o
 DIST          = ../../../Qt/5.13.0/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.13.0/clang_64/mkspecs/qdevice.pri \
@@ -230,8 +236,14 @@ DIST          = ../../../Qt/5.13.0/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.13.0/clang_64/mkspecs/features/exceptions.prf \
 		../../../Qt/5.13.0/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.13.0/clang_64/mkspecs/features/lex.prf \
-		../Charts/Charts.pro ../Charts/mainwindow.h ../Charts/main.cpp \
-		../Charts/mainwindow.cpp
+		../Charts/Charts.pro ../Charts/mainwindow.h \
+		../Charts/vert.h \
+		../Charts/horiz.h \
+		../Charts/pie.h ../Charts/main.cpp \
+		../Charts/mainwindow.cpp \
+		../Charts/vert.cpp \
+		../Charts/horiz.cpp \
+		../Charts/pie.cpp
 QMAKE_TARGET  = Charts
 DESTDIR       = 
 TARGET        = Charts.app/Contents/MacOS/Charts
@@ -641,8 +653,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.13.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Charts/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Charts/main.cpp ../Charts/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Charts/mainwindow.h ../Charts/vert.h ../Charts/horiz.h ../Charts/pie.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Charts/main.cpp ../Charts/mainwindow.cpp ../Charts/vert.cpp ../Charts/horiz.cpp ../Charts/pie.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Charts/mainwindow.ui $(DISTDIR)/
 
 
@@ -714,8 +726,11 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 main.o: ../Charts/main.cpp ../Charts/mainwindow.h \
 		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../Charts/vert.h \
 		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		../Charts/pie.h \
+		../Charts/horiz.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Charts/main.cpp
 
 mainwindow.o: ../Charts/mainwindow.cpp ../Charts/mainwindow.h \
@@ -723,6 +738,21 @@ mainwindow.o: ../Charts/mainwindow.cpp ../Charts/mainwindow.h \
 		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Charts/mainwindow.cpp
+
+vert.o: ../Charts/vert.cpp ../Charts/vert.h \
+		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o vert.o ../Charts/vert.cpp
+
+horiz.o: ../Charts/horiz.cpp ../Charts/horiz.h \
+		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o horiz.o ../Charts/horiz.cpp
+
+pie.o: ../Charts/pie.cpp ../Charts/pie.h \
+		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pie.o ../Charts/pie.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

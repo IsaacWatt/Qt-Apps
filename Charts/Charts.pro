@@ -26,10 +26,16 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    vert.cpp \
+    horiz.cpp \
+    pie.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    vert.h \
+    horiz.h \
+    pie.h
 
 FORMS += \
         mainwindow.ui
