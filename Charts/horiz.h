@@ -17,9 +17,15 @@ QT_CHARTS_USE_NAMESPACE
 
 class Horiz
 {
+
+    QLineSeries *series;
+    QFont font;
+    QCategoryAxis *axisX;
+
 public:
-    Horiz();
-    QChartView *makeChart();
+    QChart *chart;
+    Horiz(QLineSeries *series, QString &title, QCategoryAxis *axisX);
+    ~Horiz();
 };
 
 #endif // HORIZ_H

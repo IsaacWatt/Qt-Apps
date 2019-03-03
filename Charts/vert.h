@@ -17,9 +17,16 @@ QT_CHARTS_USE_NAMESPACE
 
 class Vert
 {
+
+    QBarSeries *series;
+    QFont font;
+    QCategoryAxis *axisX;
+
 public:
-    Vert();
-    QChartView *makeChart();
+    QChart *chart;
+    QBarCategoryAxis *axis;
+    Vert(QBarSeries *series, QString &title, QStringList categories);
+    ~Vert();
 };
 
 #endif // VERT_H

@@ -1,49 +1,39 @@
 #include "horiz.h"
 
-Horiz::Horiz()
+Horiz::Horiz(QLineSeries *series, QString &title, QCategoryAxis *axisX)
 {
-// series
-// chart
-// axisX
-}
+    // series data
+    this->series = series;
 
-QChartView * Horiz::makeChart() {
-    QLineSeries *series = new QLineSeries();
-    series->append(0, 16);
-    series->append(1, 25);
-    series->append(2, 24);
-    series->append(3, 19);
-    series->append(4, 33);
-    series->append(5, 25);
-    series->append(6, 34);
-
-    QChart *chart = new QChart();
-    chart->legend()->hide();
-    chart->addSeries(series);
-    chart->createDefaultAxes();
-
-    QFont font;
-    font.setPixelSize(18);
-    chart->setTitleFont(font);
-    chart->setTitleBrush(QBrush(Qt::black));
-    chart->setTitle("Barry Bonds HRs as Pirate");
-
+    // make Pen
     QPen pen(QRgb(0x000000));
     pen.setWidth(5);
-    series->setPen(pen);
+    this->series->setPen(pen);
 
-    chart->setAnimationOptions(QChart::AllAnimations);
-    QCategoryAxis *axisX = new QCategoryAxis();
-    axisX->append("1986",0);
-    axisX->append("1987",1);
-    axisX->append("1988",2);
-    axisX->append("1989",3);
-    axisX->append("1990",4);
-    axisX->append("1991",5);
-    axisX->append("1992",6);
-    chart->setAxisX(axisX, series);
-    QChartView *chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
+    // create chart
+    this->chart = new QChart();
+    this->chart->legend()->hide();
+    this->chart->addSeries(series);
+    this->chart->createDefaultAxes();
 
-    return chartView;
+    // decorations
+    this->font.setPixelSize(18);
+
+    this->chart->setTitleFont(this->font);
+    this->chart->setTitleBrush(QBrush(Qt::black));
+
+    this->chart->setTitle(title);
+    this->chart->setAnimationOptions(QChart::AllAnimations);
+
+    this->axisX = axisX;
+
+    // set chart
+    this->chart->setAxisX(this->axisX, this->series);
+}
+
+Horiz::~Horiz()
+{
+    delete this->series;
+    delete this->chart;
+    delete this->axisX;
 }

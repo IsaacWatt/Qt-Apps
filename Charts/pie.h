@@ -16,9 +16,16 @@ QT_CHARTS_USE_NAMESPACE
 
 class Pie
 {
+
+
+    QFont font;
+    QCategoryAxis *axisX;
+
 public:
-    Pie();
-    QChartView *makeChart();
+    QChart *chart;
+    QPieSeries *series;
+    Pie(QPieSeries *series, QString &title);
+    ~Pie();
 };
 
 #endif // PIE_H
